@@ -1,6 +1,5 @@
 node("docker") {
-    docker.withRegistry('dansl1982',
-'docker-hub') {
+    docker.withRegistry('https://hub.docker.com/r/dansl1982/dan/','docker-hub') {
     
         git url: "https://github.com/dslutzky/jenkins.git", credentialsId: 'git'
         sh "git rev-parse HEAD > .git/commit-id"
