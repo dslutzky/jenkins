@@ -1,16 +1,14 @@
 node("docker") {
-    docker.withRegistry('<<your-docker-registry>>',
-'<<your-docker-registry-credentials-id>>') {
+    docker.withRegistry('dansl1982',
+'docker-hub') {
     
-        git url: "<<your-git-repo-url>>", credentialsId:
-'<<your-git-credentials-id>>'
-    
+        git url: "https://github.com/dslutzky/jenkins.git", credentialsId: 'git'
         sh "git rev-parse HEAD > .git/commit-id"
         def commit_id = readFile('.git/commit-id').trim()
         println commit_id
     
         stage "build"
-        def app = docker.build "your-project-name"
+        def app = docker.build "jenkins"
     
         stage "publish"
         app.push 'master'
